@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#ffd6df" />
+    <title>لحظة هدوء</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg1: #fff6f8;
+        --bg2: #ffe2ea;
+        --rose: #c94762;
+        --rose2: #ff6b8e;
+        --ink: rgba(28, 18, 22, 0.88);
+        --muted: rgba(28, 18, 22, 0.56);
+        --muted2: rgba(28, 18, 22, 0.42);
+        --cream: rgba(255, 255, 255, 0.86);
+        --glass: rgba(255, 255, 255, 0.58);
+        --shadow: 0 18px 55px rgba(201, 71, 98, 0.16);
+        --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        font-family: 'Cairo', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(950px 520px at 18% 12%, rgba(255, 107, 142, 0.22) 0%, rgba(255, 107, 142, 0) 58%),
+          radial-gradient(820px 520px at 82% 18%, rgba(201, 71, 98, 0.16) 0%, rgba(201, 71, 98, 0) 58%),
+          linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+        overflow: hidden;
+      }
+
+      .app {
+        min-height: 100dvh;
+        padding: 24px 18px 32px;
+        display: grid;
+        place-items: center;
+      }
+
+      .stage {
+        width: min(430px, 100%);
+        display: grid;
+        place-items: center;
+        gap: 12px;
+        position: relative;
+        text-align: center;
+      }
+
+      .bg {
+        position: absolute;
+        inset: -20px;
+        overflow: hidden;
+        pointer-events: none;
+        opacity: 0.55;
+      }
+
+      .bg .h {
+        position: absolute;
+        left: var(--x);
+        bottom: -30px;
+        width: 12px;
+        height: 12px;
+        transform: rotate(45deg);
+        background: rgba(201, 71, 98, 0.18);
+        border-radius: 3px;
+        filter: blur(0.15px);
+        opacity: 0.6;
+        animation: floatUp var(--dur) linear infinite;
+      }
+
+      .bg .h::before,
+      .bg .h::after {
+        content: '';
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: inherit;
+      }
+
+      .bg .h::before {
+        left: -6px;
+        top: 0;
+      }
+
+      .bg .h::after {
+        top: -6px;
+        left: 0;
+      }
+
+      @keyframes floatUp {
+        0% {
+          transform: translateY(0) rotate(45deg) scale(0.88);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.65;
+        }
+        100% {
+          transform: translateY(-120vh) rotate(45deg) scale(1.2);
+          opacity: 0;
+        }
+      }
+
+      .veil {
+        position: absolute;
+        inset: -20px;
+        background: radial-gradient(520px 360px at 50% 40%, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0) 62%);
+        opacity: 1;
+        pointer-events: none;
+        transition: opacity 900ms var(--ease);
+      }
+
+      .stage.is-dim .veil {
+        opacity: 0.52;
+      }
+
+      .card {
+        width: min(380px, 94vw);
+        border-radius: 22px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.74) 0%, rgba(255, 255, 255, 0.52) 100%);
+        border: 1px solid rgba(201, 71, 98, 0.12);
+        box-shadow: var(--shadow);
+        padding: 22px 18px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .fade {
+        opacity: 0;
+        transform: translateY(8px);
+        transition: opacity 720ms var(--ease), transform 720ms var(--ease);
+      }
+
+      .fade.is-on {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .headline {
+        margin: 0;
+        font-family: 'Amiri', 'Cairo', serif;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+        color: rgba(28, 18, 22, 0.86);
+        font-size: 26px;
+      }
+
+      .line {
+        margin: 10px 0 0;
+        font-size: 14px;
+        color: var(--muted);
+        line-height: 2.05;
+      }
+
+      .btn {
+        margin-top: 16px;
+        width: 100%;
+        border: none;
+        border-radius: 18px;
+        padding: 14px 16px;
+        background: linear-gradient(180deg, rgba(201, 71, 98, 0.96) 0%, rgba(255, 107, 142, 0.92) 100%);
+        color: rgba(255, 255, 255, 0.98);
+        font-weight: 800;
+        font-size: 16px;
+        cursor: pointer;
+        box-shadow: 0 18px 44px rgba(201, 71, 98, 0.24);
+        transition: transform 180ms var(--ease), filter 220ms var(--ease);
+      }
+
+      .btn:active {
+        transform: scale(0.985);
+      }
+
+      .btn:focus-visible {
+        outline: 3px solid rgba(201, 71, 98, 0.2);
+        outline-offset: 3px;
+      }
+
+      .handWrap {
+        width: min(320px, 88vw);
+        margin: 10px auto 4px;
+        display: grid;
+        place-items: center;
+        position: relative;
+      }
+
+      .handGlow {
+        position: absolute;
+        inset: -14px;
+        background: radial-gradient(200px 140px at 50% 60%, rgba(255, 107, 142, 0.16) 0%, rgba(255, 107, 142, 0) 70%);
+        filter: blur(0.2px);
+        opacity: 0;
+        transition: opacity 680ms var(--ease);
+        animation: glowPulse 2.6s ease-in-out infinite;
+      }
+
+      @keyframes glowPulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.65;
+        }
+        50% {
+          transform: scale(1.04);
+          opacity: 0.9;
+        }
+      }
+
+      .stage.show-hand .handGlow {
+        opacity: 1;
+      }
+
+      .hand {
+        width: 92%;
+        max-width: 280px;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 720ms var(--ease), transform 720ms var(--ease);
+      }
+
+      .stage.show-hand .hand {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .hand path {
+        stroke: rgba(201, 71, 98, 0.55);
+        stroke-width: 1.6;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .count {
+        margin-top: 10px;
+        height: 120px;
+        display: grid;
+        place-items: center;
+      }
+
+      .num {
+        font-family: 'Amiri', 'Cairo', serif;
+        font-weight: 700;
+        font-size: 72px;
+        color: rgba(28, 18, 22, 0.78);
+        letter-spacing: 1px;
+        opacity: 0;
+        transform: translateY(8px) scale(0.99);
+        transition: opacity 540ms var(--ease), transform 540ms var(--ease);
+      }
+
+      .num.is-on {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        animation: heartBeat 1s ease-in-out 1;
+      }
+
+      @keyframes heartBeat {
+        0%,
+        100% {
+          transform: translateY(0) scale(1);
+        }
+        35% {
+          transform: translateY(0) scale(1.04);
+        }
+        70% {
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .tiny {
+        margin: 8px 0 0;
+        font-size: 12px;
+        color: var(--muted2);
+      }
+
+      .still {
+        transition: none !important;
+        animation: none !important;
+      }
+
+      .stage.is-still .bg .h {
+        animation-play-state: paused;
+        opacity: 0.08;
+      }
+
+      .stage.is-slow .bg .h {
+        animation-play-state: paused;
+        opacity: 0.14;
+      }
+
+      .stage.is-still .handGlow {
+        animation: none;
+        opacity: 0.18;
+      }
+
+      .stage.is-still .num {
+        animation: none;
+      }
+
+      .love-heart {
+        position: relative;
+        width: 250px;
+        height: 225px;
+        margin: 0 auto;
+        animation: heartPulse 2s ease-in-out infinite;
+      }
+
+      .love-heart::before,
+      .love-heart::after {
+        content: '';
+        position: absolute;
+        width: 125px;
+        height: 200px;
+        background: linear-gradient(135deg, #ff6b9d, #c44569);
+        border-radius: 125px 125px 0 0;
+        box-shadow: 0 10px 30px rgba(196, 69, 105, 0.4);
+      }
+
+      .love-heart::before {
+        left: 125px;
+        top: 0;
+        transform: rotate(-45deg);
+        transform-origin: 0 100%;
+      }
+
+      .love-heart::after {
+        left: 0;
+        top: 0;
+        transform: rotate(45deg);
+        transform-origin: 100% 100%;
+      }
+
+      .love-text {
+        position: absolute;
+        top: 55%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 48px;
+        font-weight: 900;
+        color: #fff;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        font-family: 'Amiri', serif;
+        z-index: 1;
+      }
+
+      @keyframes heartPulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+      }
+
+      .stage.is-final .bg,
+      .stage.is-final .veil {
+        display: none;
+      }
+
+      .stage.is-final .card {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+      }
+
+      .stage.is-final #finalBlock {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="app">
+      <section class="stage" id="stage">
+        <div class="bg" aria-hidden="true">
+          <span class="h" style="--x: 8%; --dur: 14s"></span>
+          <span class="h" style="--x: 18%; --dur: 18s; animation-delay: 2s"></span>
+          <span class="h" style="--x: 32%; --dur: 16s; animation-delay: 4s"></span>
+          <span class="h" style="--x: 45%; --dur: 19s; animation-delay: 1s"></span>
+          <span class="h" style="--x: 58%; --dur: 17s; animation-delay: 3s"></span>
+          <span class="h" style="--x: 72%; --dur: 15s; animation-delay: 5s"></span>
+          <span class="h" style="--x: 85%; --dur: 20s; animation-delay: 2.5s"></span>
+          <span class="h" style="--x: 92%; --dur: 16s; animation-delay: 6s"></span>
+        </div>
+
+        <div class="veil"></div>
+
+        <div class="card">
+          <h1 class="headline fade" id="l1">جاهزة ؟؟</h1>
+          <p class="line fade" id="l2">في حاجة صغيرة عايزك تعمليها ... داري شاشة الموبايل ب ايدك و غمضي عينك و عدي من 1 ل 5 براحة</p>
+
+          <button class="btn fade" id="startBtn" type="button">يلا بينااا 🤍</button>
+
+          <div class="handWrap" aria-hidden="true">
+            <div class="handGlow"></div>
+            <img src="images/human-hand-palm-inside-remix-clipart-xl.png" alt="Hand covering screen" class="hand">
+          </div>
+
+          <div class="count" aria-hidden="true">
+            <div class="num" id="num">1</div>
+          </div>
+
+          <p class="tiny fade" id="tiny">عدّي براحتك… أنا مستني</p>
+
+          <div class="fade" id="finalBlock">
+            <div class="love-heart">
+              <span class="love-text">بحبك</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      (function () {
+        const stage = document.getElementById('stage');
+        const l1 = document.getElementById('l1');
+        const l2 = document.getElementById('l2');
+        const startBtn = document.getElementById('startBtn');
+        const tiny = document.getElementById('tiny');
+        const num = document.getElementById('num');
+        const finalBlock = document.getElementById('finalBlock');
+        const handWrap = document.querySelector('.handWrap');
+        const countEl = document.querySelector('.count');
+
+        if (!stage || !l1 || !l2 || !startBtn || !tiny || !num || !finalBlock) return;
+
+        let scene = 1;
+        let counting = false;
+
+        function prefersReducedMotion() {
+          return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        }
+
+        function on(el) {
+          el.classList.add('is-on');
+        }
+
+        function off(el) {
+          el.classList.remove('is-on');
+        }
+
+        function setText(el, text) {
+          el.textContent = text;
+        }
+
+        function fadeIn(el, delayMs) {
+          window.setTimeout(() => on(el), delayMs);
+        }
+
+        function fadeOut(el) {
+          el.classList.remove('is-on');
+        }
+
+        // Scene 1 entrance timing
+        fadeIn(l1, prefersReducedMotion() ? 0 : 800);
+        fadeIn(l2, prefersReducedMotion() ? 0 : 1500);
+        fadeIn(startBtn, prefersReducedMotion() ? 0 : 2100);
+
+        function showHandScene() {
+          stage.classList.add('is-dim');
+          stage.classList.add('show-hand');
+
+          setText(l1, 'حطي إيدك كده و غطّي الشاشة');
+          setText(l2, 'متشيليش إيدك… خليهـا ثابتة');
+
+          // Keep both lines visible
+          on(l1);
+          on(l2);
+
+          // After 2s -> Scene 3
+          window.setTimeout(() => {
+            if (scene !== 2) return;
+            showCloseEyesScene();
+          }, prefersReducedMotion() ? 0 : 2000);
+        }
+
+        function showCloseEyesScene() {
+          scene = 3;
+          setText(l1, 'دلوقتي… غمضي عينك');
+          setText(l2, '');
+          l2.style.visibility = 'hidden';
+
+          // Slow background by pausing some hearts (gentle)
+          stage.classList.add('is-slow');
+
+          window.setTimeout(() => {
+            if (scene !== 3) return;
+            startCounting();
+          }, prefersReducedMotion() ? 0 : 900);
+        }
+
+        function startCounting() {
+          scene = 4;
+          l2.style.visibility = '';
+          setText(l2, '');
+          l2.classList.add('still');
+
+          counting = true;
+          on(tiny);
+
+          let i = 1;
+
+          function show(iVal) {
+            setText(num, String(iVal));
+            num.classList.remove('is-on');
+            void num.offsetWidth;
+            num.classList.add('is-on');
+          }
+
+          show(1);
+
+          const tick = () => {
+            if (!counting) return;
+            i += 1;
+            if (i <= 5) {
+              show(i);
+              window.setTimeout(tick, prefersReducedMotion() ? 0 : 1000);
+            } else {
+              stopScene();
+            }
+          };
+
+          window.setTimeout(tick, prefersReducedMotion() ? 0 : 1000);
+        }
+
+        function stopScene() {
+          scene = 5;
+          counting = false;
+
+          stage.classList.add('is-still');
+          stage.classList.add('is-final');
+
+          // Hide elements
+          if (handWrap) handWrap.style.display = 'none';
+          if (countEl) countEl.style.display = 'none';
+          if (l1) l1.style.display = 'none';
+
+          // Hide counting helper text gently
+          off(tiny);
+
+          // Fade final text in slowly
+          window.setTimeout(() => {
+            on(finalBlock);
+          }, prefersReducedMotion() ? 0 : 900);
+
+          // No buttons, no redirects, stay here intentionally.
+        }
+
+        startBtn.addEventListener('click', () => {
+          if (scene !== 1) return;
+          scene = 2;
+
+          // Remove start button
+          startBtn.style.display = 'none';
+
+          showHandScene();
+        });
+
+        // Prepare hidden elements states
+        off(l1);
+        off(l2);
+        off(startBtn);
+        off(tiny);
+        off(finalBlock);
+      })();
+    </script>
+  </body>
+</html>

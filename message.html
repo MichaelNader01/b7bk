@@ -1,0 +1,908 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#fef0f3" />
+    <title>رسالة حب 🤍</title>
+
+    <!-- Google Fonts - Arabic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ============================================
+         CSS Variables - Romantic Color Palette
+         ============================================ */
+      :root {
+        /* Background gradients */
+        --bg-1: #fef0f3;
+        --bg-2: #fcd8e0;
+        --bg-3: #f9c1cc;
+        --bg-4: #f5aabb;
+
+        /* Rose accent colors */
+        --rose: #e07689;
+        --rose-dark: #d45b72;
+        --rose-deeper: #c94762;
+
+        /* Text colors */
+        --text: #3a2a30;
+        --text-soft: rgba(58, 42, 48, 0.72);
+        --text-light: rgba(58, 42, 48, 0.55);
+
+        /* Paper colors */
+        --paper: #fffdfb;
+        --paper-tint: #fff8f5;
+
+        /* Glass & borders */
+        --glass: rgba(255, 255, 255, 0.7);
+        --border: rgba(255, 255, 255, 0.9);
+        --border-soft: rgba(201, 71, 98, 0.14);
+
+        /* Shadows */
+        --shadow: 0 12px 40px rgba(201, 71, 98, 0.12), 0 4px 12px rgba(201, 71, 98, 0.06);
+        --shadow-lg: 0 20px 60px rgba(201, 71, 98, 0.18), 0 8px 24px rgba(201, 71, 98, 0.12);
+        --shadow-paper: 0 16px 48px rgba(201, 71, 98, 0.16), 0 4px 16px rgba(201, 71, 98, 0.1);
+
+        /* Animation easing */
+        --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+        --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      }
+
+      /* ============================================
+         Reset & Base Styles
+         ============================================ */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        height: 100%;
+        overflow: hidden;
+      }
+
+      body {
+        font-family: 'Cairo', 'Tajawal', system-ui, -apple-system, sans-serif;
+        color: var(--text);
+        background: linear-gradient(140deg, var(--bg-1), var(--bg-2), var(--bg-3));
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        user-select: none;
+      }
+
+      /* ============================================
+         App Container
+         ============================================ */
+      .app {
+        max-width: 430px;
+        height: 100%;
+        margin: 0 auto;
+        position: relative;
+        isolation: isolate;
+      }
+
+      /* ============================================
+         Animated Background
+         ============================================ */
+      .bg {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      /* Gradient layer with subtle animation */
+      .bg__gradient {
+        position: absolute;
+        inset: -20%;
+        background: linear-gradient(
+          135deg,
+          #fef0f3 0%,
+          #fcd8e0 22%,
+          #f9c1cc 48%,
+          #f5aabb 76%,
+          #f2a3b3 100%
+        );
+        background-size: 320% 320%;
+        opacity: 0.92;
+        filter: blur(2px);
+        animation: gradientFlow 24s ease-in-out infinite;
+      }
+
+      @keyframes gradientFlow {
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+      }
+
+      /* Soft orbs for depth */
+      .bg__orbs {
+        position: absolute;
+        inset: -30%;
+        filter: blur(70px);
+        opacity: 0.25;
+        mix-blend-mode: soft-light;
+      }
+
+      .bg__orbs::before,
+      .bg__orbs::after {
+        content: '';
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .bg__orbs::before {
+        width: 540px;
+        height: 540px;
+        top: -12%;
+        left: -20%;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.95), transparent 68%);
+        animation: orb1 28s ease-in-out infinite;
+      }
+
+      .bg__orbs::after {
+        width: 420px;
+        height: 420px;
+        bottom: -16%;
+        right: -16%;
+        background: radial-gradient(circle, rgba(228, 116, 138, 0.6), transparent 66%);
+        animation: orb2 32s ease-in-out infinite;
+      }
+
+      @keyframes orb1 {
+        0%,
+        100% {
+          transform: translate3d(0, 0, 0) scale(1);
+        }
+        50% {
+          transform: translate3d(36px, -46px, 0) scale(1.12);
+        }
+      }
+
+      @keyframes orb2 {
+        0%,
+        100% {
+          transform: translate3d(0, 0, 0) scale(1);
+        }
+        50% {
+          transform: translate3d(-46px, 36px, 0) scale(1.16);
+        }
+      }
+
+      /* Floating hearts in background */
+      .float-hearts {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        opacity: 0.4;
+      }
+
+      .fh {
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        opacity: 0;
+        filter: blur(0.4px) drop-shadow(0 0 4px rgba(255, 105, 135, 0.2));
+        animation: fhFloat var(--dur) linear var(--delay) infinite;
+      }
+
+      /* Heart shape using pseudo-elements */
+      .fh::before,
+      .fh::after {
+        content: '';
+        position: absolute;
+        width: 10px;
+        height: 14px;
+        background: radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.65), transparent 60%),
+          linear-gradient(180deg, rgba(255, 182, 193, 0.92), rgba(228, 116, 138, 0.78));
+        border-radius: 999px 999px 3px 3px;
+      }
+
+      .fh::before {
+        left: 4px;
+        top: 2px;
+        transform: rotate(-40deg);
+      }
+
+      .fh::after {
+        left: 0;
+        top: 2px;
+        transform: rotate(40deg);
+      }
+
+      @keyframes fhFloat {
+        0% {
+          transform: translate3d(0, 120%, 0) rotate(10deg);
+          opacity: 0;
+        }
+        12% {
+          opacity: 0.14;
+        }
+        88% {
+          opacity: 0.14;
+        }
+        100% {
+          transform: translate3d(0, -30%, 0) rotate(20deg);
+          opacity: 0;
+        }
+      }
+
+      /* ============================================
+         Main Stage Layout
+         ============================================ */
+      .stage {
+        height: 100%;
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        align-items: center;
+        justify-items: center;
+        padding: 32px 20px 28px;
+        gap: 20px;
+      }
+
+      /* ============================================
+         Instruction Text
+         ============================================ */
+      .instruction {
+        margin: 0;
+        font-family: 'Amiri', 'Cairo', serif;
+        font-weight: 400;
+        font-size: 16px;
+        letter-spacing: 0.3px;
+        color: var(--text-light);
+        text-align: center;
+        opacity: 0.8;
+        animation: instPulse 2.8s ease-in-out infinite;
+        transition: opacity 0.4s ease;
+      }
+
+      @keyframes instPulse {
+        0%,
+        100% {
+          opacity: 0.6;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      /* ============================================
+         Scene Container
+         ============================================ */
+      .scene {
+        width: 100%;
+        display: grid;
+        place-items: center;
+        position: relative;
+      }
+
+      /* ============================================
+         Envelope Container
+         ============================================ */
+      .envelope-wrap {
+        width: min(380px, 92vw);
+        height: 320px;
+        position: relative;
+        display: grid;
+        place-items: center;
+        perspective: 1200px;
+      }
+
+      /* Envelope structure */
+      .envelope {
+        width: 100%;
+        height: 220px;
+        position: relative;
+        transform-style: preserve-3d;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+
+      .envelope:hover {
+        transform: translateY(-4px);
+      }
+
+      .envelope.is-opening {
+        pointer-events: none;
+      }
+
+      /* Envelope body (back panel) */
+      .envelope__body {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.85), rgba(255, 250, 252, 0.75));
+        border: 2px solid rgba(201, 71, 98, 0.18);
+        border-radius: 20px;
+        box-shadow: 
+          0 20px 60px rgba(201, 71, 98, 0.15),
+          0 8px 24px rgba(201, 71, 98, 0.1),
+          inset 0 2px 12px rgba(255, 255, 255, 0.5);
+        overflow: hidden;
+      }
+
+      /* Decorative seal on envelope */
+      .envelope__seal {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, rgba(255, 182, 193, 0.95), rgba(228, 116, 138, 0.88));
+        border-radius: 50%;
+        border: 3px solid rgba(255, 255, 255, 0.9);
+        box-shadow: 
+          0 8px 20px rgba(201, 71, 98, 0.25),
+          inset 0 2px 8px rgba(255, 255, 255, 0.4);
+        display: grid;
+        place-items: center;
+        font-size: 32px;
+        z-index: 5;
+        animation: sealPulse 2s ease-in-out infinite;
+      }
+
+      @keyframes sealPulse {
+        0%, 100% {
+          transform: translate(-50%, -50%) scale(1);
+          box-shadow: 
+            0 8px 20px rgba(201, 71, 98, 0.25),
+            inset 0 2px 8px rgba(255, 255, 255, 0.4);
+        }
+        50% {
+          transform: translate(-50%, -50%) scale(1.08);
+          box-shadow: 
+            0 12px 30px rgba(201, 71, 98, 0.35),
+            inset 0 2px 8px rgba(255, 255, 255, 0.5);
+        }
+      }
+
+      .envelope.is-opening .envelope__seal {
+        animation: sealBreak 0.6s ease forwards;
+      }
+
+      @keyframes sealBreak {
+        0% {
+          transform: translate(-50%, -50%) scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: translate(-50%, -50%) scale(1.2);
+          opacity: 0.6;
+        }
+        100% {
+          transform: translate(-50%, -50%) scale(0);
+          opacity: 0;
+        }
+      }
+
+      /* Envelope flap (top triangular piece) */
+      .envelope__flap {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 110px;
+        transform-origin: top center;
+        transform-style: preserve-3d;
+        z-index: 10;
+        transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .envelope.is-opening .envelope__flap {
+        transform: rotateX(-180deg);
+      }
+
+      /* Flap top surface */
+      .envelope__flap-front {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-left: 50% solid transparent;
+        border-right: 50% solid transparent;
+        border-top: 110px solid rgba(249, 193, 204, 0.92);
+        filter: drop-shadow(0 4px 16px rgba(201, 71, 98, 0.2));
+        backface-visibility: hidden;
+      }
+
+      /* Flap back surface */
+      .envelope__flap-back {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-left: 50% solid transparent;
+        border-right: 50% solid transparent;
+        border-top: 110px solid rgba(252, 216, 224, 0.88);
+        transform: rotateX(180deg);
+        backface-visibility: hidden;
+      }
+
+      /* Decorative shine on flap */
+      .envelope__flap::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 25%;
+        width: 50%;
+        height: 110px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.4), transparent);
+        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        pointer-events: none;
+        opacity: 0.6;
+      }
+
+      /* ============================================
+         Letter Paper
+         ============================================ */
+      .letter {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) scale(0.85);
+        width: min(340px, 88vw);
+        height: 600px;
+        border-radius: 18px;
+        background: linear-gradient(180deg, var(--paper) 0%, var(--paper-tint) 100%);
+        border: 2px solid rgba(201, 71, 98, 0.12);
+        box-shadow: var(--shadow-paper);
+        z-index: 3;
+        overflow: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .letter.is-visible {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+        pointer-events: auto;
+      }
+
+      .letter.is-floating {
+        animation: letterFloat 4s ease-in-out infinite;
+      }
+
+      @keyframes letterFloat {
+        0%, 100% {
+          transform: translate(-50%, -50%) scale(1) translateY(0);
+        }
+        50% {
+          transform: translate(-50%, -50%) scale(1) translateY(-10px);
+        }
+      }
+
+      /* Paper texture */
+      .letter::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        opacity: 0.25;
+        background-image: 
+          radial-gradient(rgba(201, 71, 98, 0.04) 1px, transparent 1px),
+          radial-gradient(rgba(201, 71, 98, 0.03) 0.5px, transparent 0.5px);
+        background-size: 14px 14px, 7px 7px;
+        background-position: 0 0, 3.5px 3.5px;
+        pointer-events: none;
+      }
+
+      /* Light highlight on paper */
+      .letter::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent 50%);
+        pointer-events: none;
+      }
+
+      /* Letter content */
+      .letter__content {
+        position: relative;
+        z-index: 1;
+        height: 100%;
+        padding: 24px 22px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        overflow-y: auto;
+      }
+
+      /* Decorative heart on letter */
+      .letter__heart {
+        position: absolute;
+        top: 16px;
+        right: 18px;
+        font-size: 20px;
+        opacity: 0.5;
+        filter: drop-shadow(0 0 12px rgba(201, 71, 98, 0.2));
+        pointer-events: none;
+        animation: heartPulse 2.5s ease-in-out infinite;
+      }
+
+      @keyframes heartPulse {
+        0%, 100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.15);
+        }
+      }
+
+      /* Message text */
+      .letter__text {
+        flex: 1;
+        margin: 0;
+        color: var(--text);
+        font-family: 'Amiri', 'Cairo', serif;
+        font-size: 15.5px;
+        line-height: 2.2;
+        letter-spacing: 0.2px;
+        text-align: justify;
+      }
+
+      /* Signature area */
+      .signature {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+        color: var(--text-soft);
+        padding-top: 12px;
+        border-top: 1.5px solid rgba(201, 71, 98, 0.1);
+      }
+
+      .signature__name {
+        font-family: 'Amiri', 'Cairo', serif;
+        font-weight: 700;
+        font-size: 17px;
+        letter-spacing: 0.3px;
+      }
+
+      .signature__heart {
+        color: var(--rose-dark);
+        font-size: 16px;
+        opacity: 0.9;
+      }
+
+      /* ============================================
+         Heart Burst Effect
+         ============================================ */
+      .burst {
+        position: fixed;
+        width: 28px;
+        height: 28px;
+        z-index: 100;
+        pointer-events: none;
+        animation: burst 800ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        opacity: 0;
+        filter: drop-shadow(0 0 12px rgba(255, 105, 135, 0.6));
+      }
+
+      @keyframes burst {
+        0% {
+          transform: translate(-50%, -50%) scale(0.3) rotate(0deg);
+          opacity: 0;
+        }
+        20% {
+          opacity: 1;
+        }
+        100% {
+          transform: translate(calc(-50% + var(--bx)), calc(-50% + var(--by))) scale(1.5) rotate(25deg);
+          opacity: 0;
+        }
+      }
+
+      /* ============================================
+         Back Button
+         ============================================ */
+      .actions {
+        width: 100%;
+        display: grid;
+        justify-items: center;
+      }
+
+      .btn-back {
+        width: min(360px, 92vw);
+        border: 0;
+        cursor: pointer;
+        border-radius: 999px;
+        padding: 16px 32px;
+        background: rgba(255, 255, 255, 0.65);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 2px solid var(--border-soft);
+        box-shadow: var(--shadow);
+        color: var(--text);
+        font-family: 'Cairo', sans-serif;
+        font-weight: 700;
+        font-size: 16px;
+        letter-spacing: 0.05em;
+        transition: all 0.2s ease;
+      }
+
+      .btn-back:hover {
+        background: rgba(255, 255, 255, 0.8);
+        transform: translateY(-2px);
+        box-shadow: 0 16px 50px rgba(201, 71, 98, 0.18);
+      }
+
+      .btn-back:active {
+        transform: translateY(0) scale(0.98);
+      }
+
+      /* ============================================
+         Reduced Motion Support
+         ============================================ */
+      @media (prefers-reduced-motion: reduce) {
+        .bg__gradient,
+        .bg__orbs::before,
+        .bg__orbs::after,
+        .fh,
+        .instruction,
+        .letter__heart,
+        .envelope__seal,
+        .letter.is-floating {
+          animation: none !important;
+        }
+
+        .envelope__flap,
+        .letter {
+          transition: all 0.3s linear;
+        }
+      }
+
+      /* ============================================
+         Mobile Optimization
+         ============================================ */
+      @media (max-width: 380px) {
+        .envelope-wrap {
+          width: 95vw;
+        }
+
+        .letter {
+          width: 92vw;
+          height: 380px;
+        }
+
+        .letter__text {
+          font-size: 14.5px;
+          line-height: 2.1;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="app">
+      <!-- Animated Background -->
+      <div class="bg" aria-hidden="true">
+        <div class="bg__gradient"></div>
+        <div class="bg__orbs"></div>
+        
+        <!-- Floating hearts -->
+        <div class="float-hearts">
+          <div class="fh" style="left: 10%; --dur: 18s; --delay: 0s;"></div>
+          <div class="fh" style="left: 25%; --dur: 22s; --delay: 3s;"></div>
+          <div class="fh" style="left: 45%; --dur: 20s; --delay: 6s;"></div>
+          <div class="fh" style="left: 65%; --dur: 19s; --delay: 2s;"></div>
+          <div class="fh" style="left: 80%; --dur: 21s; --delay: 5s;"></div>
+          <div class="fh" style="left: 90%; --dur: 23s; --delay: 8s;"></div>
+        </div>
+      </div>
+
+      <!-- Main Stage -->
+      <main class="stage">
+        <!-- Instruction text -->
+        <p class="instruction" id="instruction">اضغطي على الظرف 🤍</p>
+
+        <!-- Scene container -->
+        <div class="scene">
+          <div class="envelope-wrap">
+            <!-- Envelope structure -->
+            <div class="envelope" id="envelope" role="button" aria-label="فتح الظرف">
+              <div class="envelope__body">
+                <div class="envelope__seal" aria-hidden="true">💌</div>
+              </div>
+              
+              <div class="envelope__flap">
+                <div class="envelope__flap-front"></div>
+                <div class="envelope__flap-back"></div>
+              </div>
+            </div>
+
+            <!-- Letter (hidden initially) -->
+            <article class="letter" id="letter" aria-label="رسالة حب">
+              <div class="letter__heart" aria-hidden="true"></div>
+
+              <div class="letter__content">
+                <p class="letter__text" id="messageText">
+
+خطيبتي و روح قلبي، جوايا بجد كلام و مشاعر كتير اوي حاسس اني قدرت اقول جزء صغير منهم لما اتخطبنا، بس يا توتا ربنا الي يعلم قلبي مبسوط ازاي بجد، انا مش مستوعب اني بقيت خلاص بحبك قدام كل الناس و مش مخبي حبي ده، يمكن يكون ده اول عيد حب يعدي علينا و احنا مخطوبين بس انتي اكتر حد عارف انا بحبك من امتي، جابب اشكرك علي وجودك الي دايما بجد مديني طاقة اكمل يومي بجد مش مبالغة، شكرا علي انك لسا بتحبي مايكل و واثقة فيه و عارفه الي جواه منغير ما يقوله، شكرا علي كم الحب الي بتوصليه لمايكل بجد انتي مش متخيلة بس احساس حبك ده الي بيوصلني بيعمل فيا ايه بجدد، مش عارف اطول في الرسالة عشان شاشة الموبايل غالبا خلصت بس بامانة يا ميريت انتي اغلي حاجة عندي، ربنا يديمك نعمة في حياتي .                </p>
+
+                <div class="signature" aria-label="التوقيع">
+                  <div class="signature__name">— خطيبك الي بيموت فيكي </div>
+                  <div class="signature__heart" aria-hidden="true">❤️</div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions">
+          <button class="btn-back" id="backBtn" type="button">العودة</button>
+        </div>
+      </main>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+      (() => {
+        'use strict';
+
+        // ============================================
+        // DOM Elements
+        // ============================================
+        const envelope = document.getElementById('envelope');
+        const letter = document.getElementById('letter');
+        const instruction = document.getElementById('instruction');
+        const backBtn = document.getElementById('backBtn');
+        const envelopeWrap = document.querySelector('.envelope-wrap');
+
+        if (!envelope || !letter) return;
+
+        // ============================================
+        // State
+        // ============================================
+        let isOpened = false;
+
+        // ============================================
+        // Utility Functions
+        // ============================================
+        
+        /**
+         * Check if user prefers reduced motion
+         */
+        function prefersReducedMotion() {
+          return window.matchMedia && 
+                 window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        }
+
+        /**
+         * Create heart burst particles
+         */
+        function createHeartBurst(x, y, count) {
+          if (prefersReducedMotion() && count > 6) {
+            count = 6;
+          }
+
+          const symbols = ['❤️', '🤍', '💕', '💖', '💗', '💝'];
+
+          for (let i = 0; i < count; i++) {
+            const burst = document.createElement('div');
+            burst.className = 'burst';
+            burst.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+
+            // Random direction
+            const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.5;
+            const distance = 40 + Math.random() * 80;
+            const bx = Math.cos(angle) * distance;
+            const by = Math.sin(angle) * distance;
+
+            // Position and animation
+            burst.style.left = `${x}px`;
+            burst.style.top = `${y}px`;
+            burst.style.setProperty('--bx', `${bx.toFixed(1)}px`);
+            burst.style.setProperty('--by', `${by.toFixed(1)}px`);
+            burst.style.fontSize = `${16 + Math.random() * 12}px`;
+
+            document.body.appendChild(burst);
+
+            // Remove after animation
+            setTimeout(() => {
+              burst.remove();
+            }, 850);
+          }
+        }
+
+        // ============================================
+        // Open Envelope Animation
+        // ============================================
+        function openEnvelope() {
+          if (isOpened) return;
+          isOpened = true;
+
+          // Update instruction
+          if (instruction) {
+            instruction.style.opacity = '0';
+          }
+
+          // Start envelope opening animation
+          envelope.classList.add('is-opening');
+
+          // Create heart burst at seal position
+          if (envelopeWrap) {
+            const rect = envelopeWrap.getBoundingClientRect();
+            createHeartBurst(
+              rect.left + rect.width / 2,
+              rect.top + rect.height * 0.35,
+              prefersReducedMotion() ? 8 : 16
+            );
+          }
+
+          // Show letter after envelope starts opening
+          setTimeout(() => {
+            letter.classList.add('is-visible');
+            
+            // Add floating animation after letter is visible
+            setTimeout(() => {
+              letter.classList.add('is-floating');
+            }, 800);
+          }, prefersReducedMotion() ? 300 : 600);
+        }
+
+        // ============================================
+        // Event Handlers
+        // ============================================
+
+        /**
+         * Handle envelope click
+         */
+        function handleEnvelopeClick(e) {
+          e.preventDefault();
+          openEnvelope();
+        }
+
+        /**
+         * Handle back button click
+         */
+        function handleBackClick() {
+          window.location.href = 'index.html#gallery';
+        }
+
+        // ============================================
+        // Initialization
+        // ============================================
+
+        /**
+         * Initialize the page
+         */
+        function init() {
+          // Envelope click handler
+          envelope.addEventListener('click', handleEnvelopeClick);
+          envelope.addEventListener('touchstart', handleEnvelopeClick, { passive: false });
+
+          // Back button
+          if (backBtn) {
+            backBtn.addEventListener('click', handleBackClick);
+          }
+        }
+
+        // Start when DOM is ready
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', init);
+        } else {
+          init();
+        }
+      })();
+    </script>
+  </body>
+</html>

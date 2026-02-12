@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f7b5c1" />
+    <title>Memories</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=El+Messiri:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+      :root {
+        --bg-1: #fef0f3;
+        --bg-2: #fcd8e0;
+        --bg-3: #f9c1cc;
+        --bg-4: #f5aabb;
+        --rose: #e07689;
+        --rose-2: #d45b72;
+        --rose-glow: rgba(212, 91, 114, 0.4);
+        --text: #3a2a30;
+        --shadow: 0 12px 40px rgba(201, 71, 98, 0.12), 0 4px 12px rgba(201, 71, 98, 0.06);
+        --shadow-lg: 0 20px 60px rgba(201, 71, 98, 0.16), 0 8px 24px rgba(201, 71, 98, 0.1);
+        --glass-bg: rgba(255, 255, 255, 0.7);
+        --glass-border: rgba(255, 255, 255, 0.85);
+        --radius: 32px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: 'Cairo', 'El Messiri', system-ui, sans-serif;
+        color: var(--text);
+        overflow: auto;
+        scroll-behavior: smooth;
+        overscroll-behavior-y: contain;
+        -webkit-overflow-scrolling: touch;
+        background: linear-gradient(140deg, var(--bg-1), var(--bg-2), var(--bg-3));
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      body::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+      }
+
+      .app {
+        max-width: 430px;
+        min-height: 100%;
+        margin: 0 auto;
+        position: relative;
+        isolation: isolate;
+      }
+
+      /* Cinematic Background */
+      .bg {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .bg__gradient {
+        position: absolute;
+        inset: -15%;
+        background: linear-gradient(
+          135deg,
+          #fef0f3 0%,
+          #fcd8e0 25%,
+          #f9c1cc 50%,
+          #f5aabb 75%,
+          #f2a3b3 100%
+        );
+        background-size: 300% 300%;
+        opacity: 0.95;
+        animation: gradientShift 22s ease-in-out infinite;
+        filter: blur(2px);
+      }
+
+      @keyframes gradientShift {
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+      }
+
+      .bg__orbs::before,
+      .bg__orbs::after {
+        content: '';
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(70px);
+        opacity: 0.35;
+      }
+
+      .bg__orbs::before {
+        width: 550px;
+        height: 550px;
+        top: -100px;
+        left: -150px;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.9), transparent 65%);
+        animation: orb1 28s ease-in-out infinite;
+      }
+
+      .bg__orbs::after {
+        width: 450px;
+        height: 450px;
+        bottom: -80px;
+        right: -120px;
+        background: radial-gradient(circle, rgba(228, 116, 138, 0.7), transparent 60%);
+        animation: orb2 32s ease-in-out infinite;
+      }
+
+      @keyframes orb1 {
+        0%,
+        100% {
+          transform: translate3d(0, 0, 0) scale(1);
+        }
+        50% {
+          transform: translate3d(40px, -50px, 0) scale(1.15);
+        }
+      }
+
+      @keyframes orb2 {
+        0%,
+        100% {
+          transform: translate3d(0, 0, 0) scale(1);
+        }
+        50% {
+          transform: translate3d(-50px, 40px, 0) scale(1.2);
+        }
+      }
+
+      /* Floating Hearts */
+      .float-hearts {
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .fh {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        opacity: 0;
+        filter: blur(0.5px) drop-shadow(0 0 4px rgba(255, 105, 135, 0.3));
+        animation: fhFloat var(--fh-dur) linear var(--fh-delay) infinite;
+      }
+
+      .fh::before,
+      .fh::after {
+        content: '';
+        position: absolute;
+        width: 11px;
+        height: 16px;
+        background: radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.7), transparent 60%),
+          linear-gradient(180deg, rgba(255, 182, 193, 0.95), rgba(228, 116, 138, 0.85));
+        border-radius: 999px 999px 3px 3px;
+        box-shadow: 0 2px 8px rgba(201, 71, 98, 0.2);
+      }
+
+      .fh::before {
+        left: 5px;
+        top: 2px;
+        transform: rotate(-40deg);
+      }
+
+      .fh::after {
+        left: 0;
+        top: 2px;
+        transform: rotate(40deg);
+      }
+
+      @keyframes fhFloat {
+        0% {
+          transform: translate3d(0, 120%, 0) rotate(10deg);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.16;
+        }
+        90% {
+          opacity: 0.16;
+        }
+        100% {
+          transform: translate3d(0, -30%, 0) rotate(20deg);
+          opacity: 0;
+        }
+      }
+
+      .fh--1 { left: 8%; --fh-dur: 17s; --fh-delay: -2s; transform: scale(0.8); }
+      .fh--2 { left: 20%; --fh-dur: 21s; --fh-delay: -8s; transform: scale(1.1); }
+      .fh--3 { left: 34%; --fh-dur: 19s; --fh-delay: -4s; transform: scale(0.95); }
+      .fh--4 { left: 50%; --fh-dur: 24s; --fh-delay: -10s; transform: scale(1.3); }
+      .fh--5 { left: 66%; --fh-dur: 20s; --fh-delay: -6s; transform: scale(0.9); }
+      .fh--6 { left: 78%; --fh-dur: 27s; --fh-delay: -14s; transform: scale(1.2); }
+      .fh--7 { left: 90%; --fh-dur: 23s; --fh-delay: -9s; transform: scale(0.85); }
+      .fh--8 { left: 12%; --fh-dur: 28s; --fh-delay: -15s; transform: scale(1.4); }
+      .fh--9 { left: 42%; --fh-dur: 25s; --fh-delay: -12s; transform: scale(1); }
+      .fh--10 { left: 58%; --fh-dur: 18s; --fh-delay: -3s; transform: scale(0.75); }
+      .fh--11 { left: 72%; --fh-dur: 29s; --fh-delay: -18s; transform: scale(1.5); }
+      .fh--12 { left: 28%; --fh-dur: 31s; --fh-delay: -20s; transform: scale(1.15); }
+
+      .stage {
+        position: relative;
+        z-index: 1;
+        min-height: 100%;
+        padding: 32px 18px 48px;
+      }
+
+      .memories {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .card {
+        width: 100%;
+        border-radius: var(--radius);
+        background: 
+          linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.6) 100%),
+          rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(32px);
+        -webkit-backdrop-filter: blur(32px);
+        border: 1.5px solid rgba(255, 255, 255, 0.95);
+        box-shadow: 
+          var(--shadow-lg),
+          inset 0 1px 1px rgba(255, 255, 255, 0.9),
+          inset 0 -1px 1px rgba(201, 71, 98, 0.08);
+        overflow: hidden;
+        position: relative;
+        transform: translate3d(0, 30px, 0) scale(0.95);
+        opacity: 0;
+        filter: blur(12px);
+        transition: opacity 1.2s ease, transform 1.2s ease, filter 1.2s ease;
+      }
+
+      .card:hover {
+        transform: translate3d(0, -4px, 0) scale(0.98);
+        box-shadow: 
+          0 28px 80px rgba(201, 71, 98, 0.2), 
+          0 12px 32px rgba(201, 71, 98, 0.15),
+          inset 0 1px 1px rgba(255, 255, 255, 0.95),
+          inset 0 -1px 1px rgba(201, 71, 98, 0.06);
+      }
+
+      .card.is-visible {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+        filter: blur(0);
+      }
+
+      .card::before {
+        content: '';
+        position: absolute;
+        inset: -1px;
+        border-radius: inherit;
+        padding: 1px;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.9),
+          rgba(255, 255, 255, 0.4) 25%,
+          rgba(201, 71, 98, 0.12) 60%,
+          rgba(255, 255, 255, 0.6)
+        );
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+        opacity: 0.85;
+        animation: cardShimmer 8s ease-in-out infinite;
+      }
+
+      @keyframes cardShimmer {
+        0%, 100% { opacity: 0.8; }
+        50% { opacity: 1; }
+      }
+
+      .card::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.15) 0%,
+          transparent 40%,
+          rgba(201, 71, 98, 0.05) 100%
+        );
+        pointer-events: none;
+      }
+
+      .card__img {
+        width: 100%;
+        height: 64vh;
+        min-height: 380px;
+        max-height: 560px;
+        object-fit: cover;
+        display: block;
+        background: radial-gradient(circle at 40% 35%, rgba(255, 255, 255, 0.2), transparent 60%),
+          linear-gradient(135deg, rgba(249, 193, 204, 0.12), rgba(255, 255, 255, 0.1));
+        transform: scale(1.02);
+        transition: transform 0.6s ease;
+      }
+
+      .card:hover .card__img {
+        transform: scale(1.05);
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .card.is-visible {
+          animation: cardFloat var(--float-dur, 6s) ease-in-out infinite;
+        }
+      }
+
+      @keyframes cardFloat {
+        0%,
+        100% {
+          transform: translate3d(0, 0, 0);
+        }
+        50% {
+          transform: translate3d(0, -8px, 0);
+        }
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .card.is-visible::before {
+          animation: shimmer 5s ease-in-out infinite;
+        }
+      }
+
+      @keyframes shimmer {
+        0%,
+        100% {
+          opacity: 0.6;
+        }
+        50% {
+          opacity: 0.9;
+        }
+      }
+
+      /* Caption */
+      .caption {
+        position: absolute;
+        inset-inline-start: 20px;
+        bottom: 20px;
+        max-width: 75%;
+        padding: 12px 16px;
+        border-radius: 20px;
+        background: var(--glass-bg);
+        border: 1.5px solid rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        box-shadow: var(--shadow);
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 2;
+        letter-spacing: 0.15px;
+        opacity: 0;
+        transform: translateY(15px);
+        filter: blur(6px);
+        color: var(--text);
+      }
+
+      .card.is-visible .caption {
+        animation: captionReveal 1s ease forwards 400ms;
+      }
+
+      @keyframes captionReveal {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+          filter: blur(0);
+        }
+      }
+
+      .finale {
+        width: 100%;
+        min-height: 60vh;
+        display: grid;
+        place-items: center;
+        position: relative;
+        padding: 60px 20px;
+      }
+
+      .big-heart {
+        width: min(220px, 58vw);
+        aspect-ratio: 1 / 1;
+        position: relative;
+        filter: drop-shadow(0 16px 40px rgba(201, 71, 98, 0.25));
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+
+      .big-heart:hover {
+        transform: scale(1.05);
+      }
+
+      .big-heart::before,
+      .big-heart::after {
+        content: '';
+        position: absolute;
+        width: 52%;
+        height: 74%;
+        top: 10%;
+        background: linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.25),
+            rgba(255, 255, 255, 0) 50%
+          ),
+          linear-gradient(135deg, #f2889d, #e87c92, #d45b72, #c94762);
+        border-radius: 999px 999px 12px 12px;
+        box-shadow: 0 0 30px rgba(201, 71, 98, 0.2),
+          inset 0 2px 4px rgba(255, 255, 255, 0.3);
+      }
+
+      .big-heart::before {
+        left: 26%;
+        transform: rotate(-45deg);
+        transform-origin: 50% 80%;
+      }
+
+      .big-heart::after {
+        left: 22%;
+        transform: rotate(45deg);
+        transform-origin: 50% 80%;
+      }
+
+      .heart-glow {
+        position: absolute;
+        inset: -10%;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255, 105, 135, 0.3), transparent 65%);
+        filter: blur(30px);
+        opacity: 0.6;
+        transform: translate3d(0, 0, 0);
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .card.is-visible .big-heart {
+          animation: bigHeartBeat 2.2s ease-in-out infinite;
+        }
+        .card.is-visible .heart-glow {
+          animation: glowPulse 2.2s ease-in-out infinite;
+        }
+      }
+
+      @keyframes bigHeartBeat {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        45% {
+          transform: scale(1.08);
+        }
+        70% {
+          transform: scale(1.02);
+        }
+      }
+
+      @keyframes glowPulse {
+        0%,
+        100% {
+          opacity: 0.5;
+          transform: scale(1);
+        }
+        45% {
+          opacity: 0.85;
+          transform: scale(1.1);
+        }
+        70% {
+          opacity: 0.65;
+          transform: scale(1.03);
+        }
+      }
+
+      .spacer {
+        height: 16px;
+      }
+
+      /* Burst hearts */
+      .burst {
+        position: fixed;
+        width: 22px;
+        height: 22px;
+        z-index: 50;
+        pointer-events: none;
+        animation: heartBurst 700ms ease-out forwards;
+        opacity: 0;
+        filter: drop-shadow(0 0 8px rgba(255, 105, 135, 0.5));
+      }
+
+      @keyframes heartBurst {
+        0% {
+          transform: translate(-50%, -50%) scale(0.6);
+          opacity: 0;
+        }
+        20% {
+          opacity: 1;
+        }
+        100% {
+          transform: translate(calc(-50% + var(--bx)), calc(-50% + var(--by))) scale(1.4);
+          opacity: 0;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+        .card {
+          transition: none;
+          opacity: 1;
+          transform: none;
+          filter: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="app" id="app">
+      <div class="bg" aria-hidden="true">
+        <div class="bg__gradient"></div>
+        <div class="bg__orbs"></div>
+        <div class="float-hearts">
+          <span class="fh fh--1"></span><span class="fh fh--2"></span><span class="fh fh--3"></span
+          ><span class="fh fh--4"></span>
+          <span class="fh fh--5"></span><span class="fh fh--6"></span><span class="fh fh--7"></span
+          ><span class="fh fh--8"></span>
+          <span class="fh fh--9"></span><span class="fh fh--10"></span><span class="fh fh--11"></span
+          ><span class="fh fh--12"></span>
+        </div>
+      </div>
+
+      <main class="stage" id="stage">
+        <section class="memories" id="memories" aria-label="Memories">
+          <article class="card" style="--float-dur: 5.8s" data-memory>
+            <img class="card__img" src="images/0.jpg" alt="" />
+          </article>
+
+          <article class="card" style="--float-dur: 6.2s" data-memory>
+            <img class="card__img" src="images/1.jpg" alt="" />
+          </article>
+
+          <article class="card" style="--float-dur: 5.6s" data-memory>
+            <img class="card__img" src="images/2.jpg" alt="" />
+          </article>
+
+          <article class="card" style="--float-dur: 6.6s" data-memory>
+            <img class="card__img" src="images/3.jpg" alt="" />
+          </article>
+
+          <article class="card" style="--float-dur: 5.9s" data-memory>
+            <img class="card__img" src="images/4.jpg" alt="" />
+          </article>
+
+          <article class="card" style="--float-dur: 6.4s" data-memory>
+            <img class="card__img" src="images/5.jpg" alt="" />
+          </article>
+
+          <article class="card" style="--float-dur: 5.7s" data-memory>
+            <img class="card__img" src="images/6.jpg" alt="" />
+          </article>
+
+          <article class="card" style="--float-dur: 6.8s" data-memory>
+            <img class="card__img" src="images/7.jpg" alt="" />
+          </article>
+
+          <article class="card" style="--float-dur: 6.1s" data-memory>
+            <img class="card__img" src="images/8.jpg" alt="" />
+          </article>
+
+          <article class="card" style="--float-dur: 6.5s" data-memory>
+            <img class="card__img" src="images/9.jpg" alt="" />
+          </article>
+
+          <article class="card" style="--float-dur: 6.5s" data-memory>
+            <img class="card__img" src="images/10.jpg" alt="" />
+          </article>
+
+          <article class="card" style="--float-dur: 6.5s" data-memory>
+            <img class="card__img" src="images/11.jpg" alt="" />
+          </article>
+
+
+          <div class="spacer" aria-hidden="true"></div>
+
+          <article class="card" style="--float-dur: 6s" data-memory>
+            <div
+              class="finale"
+              role="button"
+              tabindex="0"
+              data-go-gallery
+              aria-label="الرجوع للمعرض"
+            >
+              <div class="heart-glow" aria-hidden="true"></div>
+              <div class="big-heart" aria-hidden="true"></div>
+            </div>
+          </article>
+        </section>
+
+        <audio id="music" src="music/music.mp3" preload="none" loop></audio>
+      </main>
+    </div>
+
+    <script>
+      (() => {
+        const memories = document.getElementById('memories');
+        const musicEl = document.getElementById('music');
+
+        if (!memories) return;
+
+        const cards = Array.from(memories.querySelectorAll('[data-memory]'));
+
+        function prefersReducedMotion() {
+          return (
+            window.matchMedia &&
+            window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          );
+        }
+
+        function startMusicOnce() {
+          if (!musicEl) return;
+          if (prefersReducedMotion()) return;
+          if (musicEl.dataset.started === 'true') return;
+
+          musicEl.dataset.started = 'true';
+          musicEl.volume = 0.12;
+          const p = musicEl.play();
+          if (p && typeof p.catch === 'function') {
+            p.catch(() => {
+              musicEl.dataset.started = 'false';
+            });
+          }
+        }
+
+        function revealInView() {
+          if (!('IntersectionObserver' in window)) {
+            cards.forEach((c) => c.classList.add('is-visible'));
+            return;
+          }
+
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('is-visible');
+                  io.unobserve(entry.target);
+                }
+              });
+            },
+            { root: null, threshold: 0.2, rootMargin: '0px 0px -12% 0px' }
+          );
+
+          cards.forEach((c) => io.observe(c));
+        }
+
+        function init() {
+          revealInView();
+          document.addEventListener('pointerdown', startMusicOnce, {
+            passive: true,
+            once: true
+          });
+
+          const finale = memories.querySelector('[data-go-gallery]');
+          if (finale) {
+            const go = () => {
+              window.location.href = 'index.html#gallery';
+            };
+
+            finale.addEventListener('click', () => {
+              go();
+            });
+
+            finale.addEventListener('keydown', (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                go();
+              }
+            });
+          }
+        }
+
+        init();
+      })();
+    </script>
+  </body>
+</html>

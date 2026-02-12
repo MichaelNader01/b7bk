@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f7b5c1" />
+    <title>فالنتاين</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=El+Messiri:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <a class="skip" href="#page-welcome">تخطي المقدمة</a>
+
+    <div class="app" aria-live="polite">
+      <!-- Cinematic Background Layers -->
+      <div class="bg-cinema" aria-hidden="true">
+        <div class="bg-cinema__gradient"></div>
+        <div class="bg-cinema__orbs"></div>
+        <div class="bg-cinema__mesh"></div>
+        <div class="bg-cinema__vignette"></div>
+      </div>
+
+      <header class="intro" id="intro" aria-hidden="false">
+        <div class="intro__grain" aria-hidden="true"></div>
+
+        <div class="heart-scene" id="heartScene" aria-hidden="true">
+          <div class="heart-scene__glow" aria-hidden="true"></div>
+          <div class="heart-scene__particles" id="heartParticles" aria-hidden="true"></div>
+        </div>
+      </header>
+
+      <main class="stage" id="stage">
+        <section class="page page--active" id="page-welcome" data-page="welcome">
+          <div class="ambient" aria-hidden="true">
+            <span class="ambient__shape ambient__shape--a"></span>
+            <span class="ambient__shape ambient__shape--b"></span>
+            <span class="ambient__shape ambient__shape--c"></span>
+          </div>
+
+          <div class="center center--reveal" id="welcomeCard">
+            <h1 class="title" id="mainTitle" data-typing>
+              هاي يا روح قلبي <span class="title__heart" aria-hidden="true">🤍</span>
+            </h1>
+
+            <button class="btn" id="startBtn" type="button">
+              <span class="btn__glow" aria-hidden="true"></span>
+              <span class="btn__text">هاااي يا قلبي</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="page" id="page-next" data-page="next" aria-hidden="true">
+          <div class="float-hearts" aria-hidden="true">
+            <span class="fh fh--1"></span>
+            <span class="fh fh--2"></span>
+            <span class="fh fh--3"></span>
+            <span class="fh fh--4"></span>
+            <span class="fh fh--5"></span>
+            <span class="fh fh--6"></span>
+            <span class="fh fh--7"></span>
+            <span class="fh fh--8"></span>
+            <span class="fh fh--9"></span>
+            <span class="fh fh--10"></span>
+            <span class="fh fh--11"></span>
+            <span class="fh fh--12"></span>
+          </div>
+
+          <div class="card card--game" id="gameCard">
+            <h2 class="question" id="qText">
+              توتاا.. بما إن انهاردة الفلانتاين…
+              <br />
+              يا ترى انتي بتحبيني انهاردة؟ <span class="title__heart" aria-hidden="true">🤍</span>
+            </h2>
+
+            <p class="tease" id="teaseText">جربي تقولي لا 😌</p>
+
+            <div class="choice-area" id="choiceArea">
+              <button class="btn btn--soft btn--no" id="noBtn" type="button">
+                <span class="btn__ripple" aria-hidden="true"></span>
+                <span class="btn__text">لا</span>
+              </button>
+              <button class="btn" id="yesBtn" type="button">
+                <span class="btn__glow" aria-hidden="true"></span>
+                <span class="btn__text">بحبك</span>
+              </button>
+            </div>
+
+            <button class="btn btn--ghost" id="backBtn" type="button">
+              <span class="btn__text">ارجع</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="page" id="page-third" data-page="third" aria-hidden="true">
+          <div class="float-hearts float-hearts--third" aria-hidden="true">
+            <span class="fh fh--1"></span>
+            <span class="fh fh--2"></span>
+            <span class="fh fh--3"></span>
+            <span class="fh fh--4"></span>
+            <span class="fh fh--5"></span>
+            <span class="fh fh--6"></span>
+            <span class="fh fh--7"></span>
+            <span class="fh fh--8"></span>
+            <span class="fh fh--9"></span>
+            <span class="fh fh--10"></span>
+            <span class="fh fh--11"></span>
+            <span class="fh fh--12"></span>
+          </div>
+
+          <div class="card card--gallery" id="galleryCard">
+            <div class="gallery" id="gallery">
+              <a class="frame" href="song.html" data-dest="song.html">
+                <span class="frame__glow" aria-hidden="true"></span>
+                <span class="frame__heart" aria-hidden="true">❤</span>
+                <img class="frame__img" src="images/song.png" alt="" />
+              </a>
+
+              <a class="frame" href="message.html" data-dest="message.html">
+                <span class="frame__glow" aria-hidden="true"></span>
+                <span class="frame__heart" aria-hidden="true">❤</span>
+                <img class="frame__img" src="images/letter.png" alt="" />
+              </a>
+
+              <a class="frame" href="memories.html" data-dest="memories.html">
+                <span class="frame__glow" aria-hidden="true"></span>
+                <span class="frame__heart" aria-hidden="true">❤</span>
+                <img class="frame__img" src="images/images.png" alt="" />
+              </a>
+
+              <a class="frame" href="gate.html" data-dest="gate.html">
+                <span class="frame__glow" aria-hidden="true"></span>
+                <span class="frame__heart" aria-hidden="true">❤</span>
+                <img class="frame__img" src="images/gift.png" alt="" />
+              </a>
+            </div>
+
+            <button class="btn btn--ghost" id="backToGameBtn" type="button">
+              <span class="btn__text">ارجع</span>
+            </button>
+          </div>
+
+          <audio id="bgMusic" src="music.mp3" preload="none" loop></audio>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
